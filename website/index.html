@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Dynamic Bundles for ASP.NET MVC</title>        <link href="Content/bootstrap-3.1.1/bootstrap.css" rel="stylesheet"/>
+        <link href="Content/Site.css" rel="stylesheet"/>    </head>
+    <body>
+        <div class="container">
+            <h1>Dynamic Bundles for ASP.NET MVC</h1>
+
+            <h2>Benefits/key takeaways</h2>
+
+            <p>
+                Dynamic bundles dramatically improves maintainability and code reuse of ASP.NET MVC sites
+                by:
+            </p>
+            <ul>
+                <li>
+                    Co-location the HTML, CSS, JavaScript and images that make up a page or component together, instead
+                    of organizing in separate directories by type. This makes dependencies between files of different types much clearer.
+                </li>
+                <li>
+                    Auto generating CSS and JavaScript bundles that contain the right files in the right order, based
+                    on their file organisation. Caching keeps CPU usage and disk accesses minimal.
+                </li>
+            </ul>
+
+
+            <h2>Download from NuGet + social media</h2>
+
+
+            <h2>File Structure</h2>
+
+            <div class="clearfix">
+                <div class="halfcolumn">
+                    <p>Classic MVC</p>
+                    <ul>
+                        <li>
+                            HTML, CSS, JavaScript and image files organised in separate directories by type.
+                        </li>
+                        <li>
+                            CSS, JavaScript that support different components tend to be put in the same physical files,
+                            creating hidden dependencies.
+                        </li>
+                        <li>
+                            Long brittle urls from CSS files to background images.
+                        </li>
+                        <li>
+                            Unclear what CSS, JavaScript and images are required for given component, making reuse harder.
+                        </li>
+                    </ul>
+
+
+
+                    <img src="Images/standardmvc-solutionexplorer2-withtext.png" />
+                </div>
+                <div class="halfcolumn">
+                    <p>Dynamic Bundles</p>
+                    <ul>
+                        <li>
+                            HTML, CSS, JavaScript and image files that belong together sit in the same directory. 
+                            
+                            
+                            Dynamic Bundles contains a 
+                            view engine that lets you put partial views and layout files in their own sub directories.
+                        </li>
+                        <li>
+                            Splitting CSS, JavaScript by component encourages developers to keep these files small and focussed.
+                        </li>
+                        <li>
+                            Having CSS and images referred from that CSS in the same directory makes for short simple image urls.
+                        </li>
+                        <li>
+                            Putting all assets that make up a component in a separate directory makes reuse much easier.
+                        </li>
+                    </ul>
+
+                    <img src="Images/dynamicbundles-solutionexplorer2-withtext.png" />
+                </div>
+            </div>
+
+            <h2>Bundles</h2>
+
+            <div class="clearfix">
+                <div class="halfcolumn">
+                    <p>Classic MVC</p>
+                    <ul>
+                    </ul>
+                    <pre>
+public static void RegisterBundles(BundleCollection bundles)
+{
+    // Need to create bundles yourself, in code. To make any change, you have to recompile.
+    // Must always make sure to include the right files in the right order.
+
+    bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jquery-{version}.js"));
+
+    bundles.Add(new ScriptBundle("~/bundles/shared/js").Include(
+                "~/Scripts/SharedCode.js",
+                "~/Scripts/VariousCode.js"));
+
+    bundles.Add(new ScriptBundle("~/bundles/pile/js").Include(
+                "~/Scripts/PileOfCode.js"));
+
+    bundles.Add(new StyleBundle("~/Content/shared/css").Include(
+                "~/Content/Reset.css",
+                "~/Content/Site.css"));
+
+    bundles.Add(new StyleBundle("~/Content/account/css").Include("~/Content/Account.css"));
+}
+                    </pre>
+
+                    <pre>
+@Styles.Render("~/Content/shared/css")
+@Styles.Render("~/Content/account/css")
+...
+@RenderBody()
+...
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/shared/js")
+@Scripts.Render("~/bundles/pile/js")
+                    </pre>
+
+
+                </div>
+                <div class="halfcolumn">
+                    <p>Dynamic Bundles</p>
+                    <ul>
+                        <li></li>
+
+
+                        files split by Area, controller, _layout to optimise sharing while minimising file sizes
+
+                    </ul>
+
+
+                                <p>Auto generates bundles</p>
+            <ul>
+                <li>
+                    Ensures CSS and JavaScript files loaded in the right order
+                </li>
+                <li>
+                    CSS and JavaScript that are actually needed are loaded
+                </li>
+                <li>
+                    No need to create bundles yourself
+                </li>
+                <li>
+                    When CSS and JavaScript files are added or deleted,
+                    new bundles are automatically generated to take account of this
+                </li>
+            </ul>
+
+
+
+
+
+
+                    <pre>
+public class BundleConfig
+{
+    public static void RegisterBundles(BundleCollection bundles)
+    {
+        // No need to register bundles in BundleConfig
+    }
+}
+                    </pre>
+
+
+                    <pre>
+@*Nominate where to load the bundles. The bundles themselves are automatically generated.*@
+@DynamicBundlesTopRender()
+...
+@RenderBody()
+...
+@DynamicBundlesBottomRender()
+                    </pre>
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+            <h2>How it works</h2>
+
+
+
+            <h2>Installation</h2>
+
+        </div>
+    </body>
+</html>
+
+
+

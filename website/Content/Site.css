@@ -1,0 +1,16 @@
+
+.container {
+    width: 80%;
+}
+
+.halfcolumn {
+    float: left;
+    max-width: 45%;
+}
+
+.halfcolumn img {
+    width: 100%;
+}
+
+
+
