@@ -30,6 +30,8 @@
             <h2>Download from NuGet + social media</h2>
 
 
+            <!-- ====================================================================== -->
+
             <h2>File Structure</h2>
 
             <div class="clearfix">
@@ -80,6 +82,8 @@
                     <img src="Images/dynamicbundles-solutionexplorer2-withtext.png" />
                 </div>
             </div>
+
+            <!-- ====================================================================== -->
 
             <h2>Bundles</h2>
 
@@ -175,24 +179,26 @@ public class BundleConfig
                 </div>
             </div>
 
-            <a name="howitworks"></a><h2>How it works</h2>
 
-
+            <!-- ====================================================================== -->
 
             <a name="installation"></a><h2>Installation</h2>
 
             <ol>
                 <li>
-                    <a href="#install">Install Dynamic Bundles</a>
+                    <a href="#installation-install">Install Dynamic Bundles</a>
                 </li>
                 <li>
-                    <a href="#globalasax">Add view engine to global.asax</a>
+                    <a href="#installation-globalasax">Add view engine to global.asax</a>
                 </li>
                 <li>
-                    <a href="#layout">Add layout container</a>
+                    <a href="#installation-layout">Add layout container</a>
                 </li>
                 <li>
-                    <a href="#webconfig">Update Web.config for views</a>
+                    <a href="#installation-webconfig">Update Web.config for views</a>
+                </li>
+                <li>
+                    <a href="#installation-colocateassets">Co-locate assets</a>
                 </li>
             </ol>
 
@@ -201,6 +207,8 @@ public class BundleConfig
                 Install the DynamicBundles package from NuGet:
             </p>
             <pre>Install-Package DynamicBundles</pre>
+
+            <!-- ====================================================================== -->
 
             <a name="installation-globalasax"></a><h3>Add view engine to global.asax</h3>
 
@@ -230,6 +238,8 @@ public class MvcApplication : System.Web.HttpApplication
 }
             </pre>
 
+
+            <!-- ====================================================================== -->
 
             <a name="installation-layout"></a><h3>Add layout container</h3>
             <p>
@@ -316,6 +326,8 @@ public class MvcApplication : System.Web.HttpApplication
 
 
 
+            <!-- ====================================================================== -->
+
             <a name="installation-webconfig"></a><h3>Update Web.config for views</h3>
 
             <p>
@@ -358,6 +370,37 @@ public class MvcApplication : System.Web.HttpApplication
   &lt;/system.webServer&gt;
 &lt;/configuration&gt;
             </pre>
+
+
+            <!-- ====================================================================== -->
+
+            <a name="installation-colocateassets"></a><h3>Co-locate assets</h3>
+            <p>
+                Finally co-locate your asset files (CSS, JavaScript, images) with the views where they are used:
+            </p>
+
+            <ul>
+                <li>
+                    Move all assets that are shared throughout the site in the 
+                    <span class="term">_LayoutContainer</span>
+                    directory.
+                    
+                     <img src="Images/movefiles-layoutcontainer.PNG" />
+                </li>
+                <li>
+                    Move all assets that are shared by all views for a controller into that controller's directory.
+                    
+                     <img src="Images/movefiles-controller.PNG" />
+                </li>
+                <li>
+                    If there are assets specific to a single view file, create a new directory for that view file
+                    and put all assets (including the view itself) into that directory. Be sure to name the directory the same as
+                    the view file, without the extension.
+                    
+                     <img src="Images/movefiles-dirperfile.PNG" />
+                </li>
+            </ul>
+
 
 
 
