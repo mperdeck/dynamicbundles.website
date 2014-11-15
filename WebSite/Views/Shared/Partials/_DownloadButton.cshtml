@@ -1,0 +1,20 @@
+﻿@using ViewExtensions
+@using WebSite.App_Code
+
+@{
+    string url = null;
+    var pageVersion = PageVersions.CurrentVersion();
+
+    url = SiteConstants.NugetDownloadUrl;
+}
+
+@if (url != null)
+{
+    <a href="@url" class="download-button" target="_blank">
+            <span class="install-button-caption">Install</span>
+            <p>NuGet Package @(SiteConstants.CurrentVersion)</p>
+    </a>
+}
+
+
+
