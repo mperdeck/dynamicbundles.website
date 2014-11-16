@@ -20,18 +20,11 @@ a.logo
 .mvc-version-heading {
     font-weight: bold;
     border-bottom: 1px solid #000000;
-    margin-top: 10px;
 }
 
 li img {
     display: block;
     margin: 10px 0 0 40px;
-}
-
-@media (min-width: 1366px) {
-    .container.wide {
-        width: 1350px;
-    }
 }
 
 /* --------------------------------------- */
@@ -345,7 +338,7 @@ h3, .h3 {
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4 {
-margin-bottom: 15px;
+margin-bottom: 20px;
 }
 
 h4 {

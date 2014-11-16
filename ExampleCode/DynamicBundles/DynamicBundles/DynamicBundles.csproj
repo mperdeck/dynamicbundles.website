@@ -109,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -119,14 +122,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Views\Account\Account.css" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\EditDetails.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Index.css" />
+    <Content Include="Views\Home\Logo.png" />
+    <Content Include="Views\Home\WelcomeAnimation.js" />
+    <Content Include="Views\Product\Details.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Product\List.cshtml" />
     <Content Include="Views\Product\Product.css" />
+    <Content Include="Views\Product\ProductPageBg.png" />
     <Content Include="Views\Product\ProductViewer.js" />
     <Content Include="Views\Shared\_LayoutContainer\Reset.css" />
     <Content Include="Views\Shared\_LayoutContainer\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="Views\Home\Logo.png" />
-    <Content Include="Views\Product\ProductPageBackground.png" />
     <Content Include="Views\Shared\_LayoutContainer\jquery-1.8.2.js" />
     <Content Include="Views\Shared\_LayoutContainer\SharedCode.js" />
     <Content Include="Views\Shared\_Layout\_Layout.css" />
@@ -142,7 +156,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Images\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
@@ -151,14 +164,11 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\Details.cshtml" />
-    <Content Include="Views\Account\EditDetails.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Product\Details.cshtml" />
-    <Content Include="Views\Product\List.cshtml" />
     <Content Include="Views\Shared\_Layout\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LayoutContainer\_LayoutContainer.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

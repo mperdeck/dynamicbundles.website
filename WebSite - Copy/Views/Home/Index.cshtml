@@ -62,14 +62,16 @@
             @*======================================================================*@
 
 <div class="pagesection odd">
-<div class="container wide">
+<div class="container">
     <div class="row row-divider">
         <div class="col-xs-12">
             <a name="filestructure"></a><h2>File Structure</h2>
         </div>
     </div>
+</div>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-lg-6" style="min-width: 660px">
+        <div class="col-lg-offset-1 col-xs-12 col-lg-5">
                     <p class="mvc-version-heading">Classic MVC</p>
                     <ul>
                         <li>
@@ -89,7 +91,7 @@
 
                     <img src="Images/standardmvc-solutionexplorer2-withtext.png" />
         </div>
-        <div class="col-xs-12 col-lg-6" style="min-width: 660px">
+        <div class="col-xs-12 col-lg-5">
                     <p class="mvc-version-heading">Dynamic Bundles</p>
                     <ul>
                         <li>
@@ -434,7 +436,7 @@ public class MvcApplication : System.Web.HttpApplication
                 Finally co-locate your asset files (CSS, JavaScript, images) with the views where they are used:
             </p>
 
-            <ul class="large-items">
+            <ul>
                 <li>
                     Move all assets that are shared throughout the site in the 
                     <span class="term">_LayoutContainer</span>
