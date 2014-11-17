@@ -28,11 +28,42 @@ li img {
     margin: 10px 0 0 40px;
 }
 
-@media (min-width: 1366px) {
+.codeheading {
+    font-style: italic;
+}
+
+.file-structure-bullets {
+    height: auto;
+}
+
+.bundle-bullets {
+    height: auto;
+}
+
+.register-bundles-section {
+    height: auto;
+}
+
+@media (min-width: 1365px) {
     .container.wide {
         width: 1350px;
     }
+
+    .file-structure-bullets {
+        height: 220px;
+    }
 }
+
+@media (min-width: 1200px) {
+    .bundle-bullets {
+        height: 170px;
+    }
+
+    .register-bundles-section {
+        height: 470px;
+    }
+}
+
 
 /* --------------------------------------- */
 /* We're using a boostrap button group for the version, plus the custom versions class */
@@ -111,6 +142,7 @@ h2
 .addedcode 
 {
     color: #AD0101;
+    background-color: #FFFF80;
 }
 
 .deletedcode {

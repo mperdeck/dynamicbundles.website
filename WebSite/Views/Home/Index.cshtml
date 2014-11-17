@@ -34,18 +34,18 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-sm-8">
 
             <h3>Key benefits</h3>
 
             <p>
-                Dynamic Bundles is an extension of the Razor view engine and MVC bundles
-                that greatly improves maintainability and code reuse of ASP.NET MVC sites:
+                Dynamic Bundles is an extension of the Razor view engine and MVC bundles.
+                It greatly improves maintainability and code reuse of ASP.NET MVC sites:
             </p>
-            <ul>
+            <ul class="large-items">
                 <li>
                     Co-locate the HTML, CSS, JavaScript and images that make up a page or component in the same directory, instead
-                    of organizing these files in separate directories by type - clearly exposing dependencies.
+                    of organizing these files in separate directories by type. This clearly exposes dependencies.
                 </li>
                 <li>
                     Auto generate CSS and JavaScript bundles that contain the right files in the right order, based
@@ -71,19 +71,19 @@
     <div class="row">
         <div class="col-xs-12 col-lg-6" style="min-width: 660px">
                     <p class="mvc-version-heading">Classic MVC</p>
-                    <ul>
+                    <ul class="large-items file-structure-bullets">
                         <li>
-                            HTML, CSS, JavaScript and image files organised in separate directories by type.
+                            HTML, CSS, JavaScript and image files organized in separate directories by type.
                         </li>
                         <li>
-                            CSS, JavaScript that support different components tend to be put in the same physical files,
+                            CSS and JavaScript that support different pages and components often put in the same physical files,
                             creating hidden dependencies.
                         </li>
                         <li>
                             Long brittle urls from CSS files to background images.
                         </li>
                         <li>
-                            Unclear what CSS, JavaScript and images are required for given component, making reuse harder.
+                            Unclear what CSS, JavaScript and images are required for a given component, making reuse harder.
                         </li>
                     </ul>
 
@@ -91,22 +91,21 @@
         </div>
         <div class="col-xs-12 col-lg-6" style="min-width: 660px">
                     <p class="mvc-version-heading">Dynamic Bundles</p>
-                    <ul>
+                    <ul class="large-items file-structure-bullets">
                         <li>
                             HTML, CSS, JavaScript and image files that belong together sit in the same directory. 
-                            
-                            
-                            Dynamic Bundles contains a 
-                            view engine that lets you put partial views and layout files in their own sub directories.
+                        </li>
+                        <li>
+                            The view engine included in Dynamic Bundles lets you put partial views and layout files in their own sub directories.
                         </li>
                         <li>
                             Splitting CSS, JavaScript by component encourages developers to keep these files small and focussed.
                         </li>
                         <li>
-                            Having CSS and images referred from that CSS in the same directory makes for short simple image urls.
+                            Short simple image background image urls in your CSS.
                         </li>
                         <li>
-                            Putting all assets that make up a component in a separate directory makes reuse much easier.
+                            Co-locating all assets that make up a component makes reuse much easier.
                         </li>
                     </ul>
 
@@ -128,7 +127,7 @@
         <div class="row">
             <div class="col-xs-12 col-lg-6">
                         <p class="mvc-version-heading">Classic MVC</p>
-                        <ul>
+                        <ul class="large-items bundle-bullets">
                             <li>
                                 You have to create and maintain bundles yourself.
                             </li>
@@ -136,13 +135,62 @@
                                 You have to make sure to include the correct files, and in the right order.
                             </li>
                             <li>
-                                Need to recompile and redeploy the site to change bundles.
+                                When CSS and JavaScript files are added or deleted,
+                                the site needs to be recompiled.
                             </li>
                         </ul>
+
+                <div class="visible-lg">
+                    <p class="codeheading">
+                        From having to create your own bundles ...
+                    </p>
+                    <div class="register-bundles-section">
+                            <pre>
+    public static void RegisterBundles(BundleCollection bundles)
+    {
+        // Need to create bundles yourself, in code. To make any change,
+        // you have to recompile. Must always make sure to include the
+        // right files in the right order.
+
+        bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                    "~/Scripts/jquery-{version}.js"));
+
+        bundles.Add(new ScriptBundle("~/bundles/shared/js").Include(
+                    "~/Scripts/SharedCode.js",
+                    "~/Scripts/VariousCode.js"));
+
+        bundles.Add(new ScriptBundle("~/bundles/pile/js").Include(
+                    "~/Scripts/PileOfCode.js"));
+
+        bundles.Add(new StyleBundle("~/Content/shared/css").Include(
+                    "~/Content/Reset.css",
+                    "~/Content/Site.css"));
+
+        bundles.Add(new StyleBundle("~/Content/account/css").Include(
+                    "~/Content/Account.css"));
+    }
+                            </pre>
+                        </div>
+
+                    <p class="codeheading">
+                        From having to ensure the right files are loaded in the right order ...
+                    </p>
+                            <pre>
+    @@Styles.Render("~/Content/shared/css")
+    @@Styles.Render("~/Content/account/css")
+    ...
+    @@RenderBody()
+    ...
+    @@Scripts.Render("~/bundles/jquery")
+    @@Scripts.Render("~/bundles/shared/js")
+    @@Scripts.Render("~/bundles/pile/js")
+                            </pre>
+
+                </div>
             </div>
             <div class="col-xs-12 col-lg-6">
                         <p class="mvc-version-heading">Dynamic Bundles</p>
-                        <ul>
+                        <ul class="large-items bundle-bullets">
                             <li>
                                 Bundles are auto generated. No need to create bundles yourself.
                             </li>
@@ -154,39 +202,18 @@
                             </li>
                             <li>
                                 When CSS and JavaScript files are added or deleted,
-                                new bundles are automatically generated to take account of this
+                                new bundles are automatically generated without recompilation.
                             </li>
                         </ul>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-lg-6">
-                        <pre>
-public static void RegisterBundles(BundleCollection bundles)
-{
-    // Need to create bundles yourself, in code. To make any change, you have to recompile.
-    // Must always make sure to include the right files in the right order.
 
-    bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js"));
-
-    bundles.Add(new ScriptBundle("~/bundles/shared/js").Include(
-                "~/Scripts/SharedCode.js",
-                "~/Scripts/VariousCode.js"));
-
-    bundles.Add(new ScriptBundle("~/bundles/pile/js").Include(
-                "~/Scripts/PileOfCode.js"));
-
-    bundles.Add(new StyleBundle("~/Content/shared/css").Include(
-                "~/Content/Reset.css",
-                "~/Content/Site.css"));
-
-    bundles.Add(new StyleBundle("~/Content/account/css").Include("~/Content/Account.css"));
-}
-                        </pre>
-            </div>
-            <div class="col-xs-12 col-lg-6">
+                <p class="codeheading visible-lg">
+                    To no longer having to worry about them ...
+                </p>
+                <p class="codeheading hidden-lg">
+                    No need to register bundles yourself
+                </p>
+                <div class="register-bundles-section">
                         <pre>
 public class BundleConfig
 {
@@ -196,25 +223,19 @@ public class BundleConfig
     }
 }
                         </pre>
-            </div>
-        </div>
+                </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-lg-6">
+
+                <p class="codeheading visible-lg">
+                    To Dynamic Bundles doing this for you ...
+                </p>
+                <p class="codeheading hidden-lg">
+                    Bundles are rendered for you, in a place you nominate
+                </p>
                         <pre>
-@@Styles.Render("~/Content/shared/css")
-@@Styles.Render("~/Content/account/css")
-...
-@@RenderBody()
-...
-@@Scripts.Render("~/bundles/jquery")
-@@Scripts.Render("~/bundles/shared/js")
-@@Scripts.Render("~/bundles/pile/js")
-                        </pre>
-            </div>
-            <div class="col-xs-12 col-lg-6">
-                        <pre>
-@@*Nominate where to load the bundles. The bundles themselves are automatically generated.*@@
+@@*Nominate where to load the bundles.
+The bundles themselves are automatically generated.*@@
+
 @@DynamicBundlesTopRender()
 ...
 @@RenderBody()
@@ -223,239 +244,248 @@ public class BundleConfig
                         </pre>
             </div>
         </div>
+
     </div>
 </div>
 
 
             @*======================================================================*@
 
-<div class="container pagesection odd">
-    <div class="row">
-        <div class="col-xs-12">
-            <a name="installation"></a><h2>Installation</h2>
+<div class="pagesection odd">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <a name="installation"></a><h2>Installation</h2>
 
-            <ol>
-                <li>
-                    <a href="#installation-install">Install Dynamic Bundles</a>
-                </li>
-                <li>
-                    <a href="#installation-globalasax">Add view engine to global.asax</a>
-                </li>
-                <li>
-                    <a href="#installation-layout">Add layout container</a>
-                </li>
-                <li>
-                    <a href="#installation-webconfig">Update Web.config for views</a>
-                </li>
-                <li>
-                    <a href="#installation-colocateassets">Co-locate assets</a>
-                </li>
-            </ol>
+                <ol>
+                    <li>
+                        <a href="#installation-install">Install Dynamic Bundles</a>
+                    </li>
+                    <li>
+                        <a href="#installation-globalasax">Add view engine to global.asax</a>
+                    </li>
+                    <li>
+                        <a href="#installation-layout">Add layout container</a>
+                    </li>
+                    <li>
+                        <a href="#installation-webconfig">Update Web.config for views</a>
+                    </li>
+                    <li>
+                        <a href="#installation-colocateassets">Co-locate assets</a>
+                    </li>
+                </ol>
 
-            @*-----------------------------------------------------------------------------*@
+                @*-----------------------------------------------------------------------------*@
 
-            <a name="installation-install"></a><h3>1. Install Dynamic Bundles</h3>
-            <p>
-                Install the DynamicBundles package from NuGet:
-            </p>
-            <pre>Install-Package DynamicBundles</pre>
+                <a name="installation-install"></a><h3>1. Install Dynamic Bundles</h3>
+                <p>
+                    Install the DynamicBundles package from NuGet:
+                </p>
+                <pre>Install-Package DynamicBundles</pre>
 
-            @*-----------------------------------------------------------------------------*@
+                @*-----------------------------------------------------------------------------*@
 
-            <a name="installation-globalasax"></a><h3>2. Add view engine to global.asax</h3>
+                <a name="installation-globalasax"></a><h3>2. Add view engine to global.asax</h3>
 
-            <p>
-                Update your <span class="term">global.asax.cs</span> or <span class="term">global.asax.vb</span>, to add 
-                the DynamicBundles view engine:
-            </p>
+                <p>
+                    Update your <span class="term">global.asax.cs</span> or <span class="term">global.asax.vb</span>, to add 
+                    the DynamicBundles view engine:
+                </p>
 
-            <pre>
-public class MvcApplication : System.Web.HttpApplication
-{
-    protected void Application_Start()
+                <pre>
+    public class MvcApplication : System.Web.HttpApplication
     {
-        AreaRegistration.RegisterAllAreas();
-        WebApiConfig.Register(GlobalConfiguration.Configuration);
-        FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-        RouteConfig.RegisterRoutes(RouteTable.Routes);
-        <span class="deletedcode">BundleConfig.RegisterBundles(BundleTable.Bundles);</span>
-<span class="addedcode">
-        // Add DynamicBundles view engine. This functions the same as the Razor view engine,
-        // but can find views sitting in their own directories, such as ~/Views/Home/Index/Index.cshtml
-        // Note: this leaves the other view engines in place, so they can still be used.
-        ViewEngines.Engines.Add(new DynamicBundles.DynamicBundlesViewEngine()); </span>
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            <span class="deletedcode">BundleConfig.RegisterBundles(BundleTable.Bundles);</span>
+    <span class="addedcode">
+            // Add DynamicBundles view engine. This functions the same as 
+            // the Razor view engine, but can find views sitting in their own 
+            // directories, such as ~/Views/Home/Index/Index.cshtml
+            // Note: this leaves the other view engines in place, so they can still be used.
+            ViewEngines.Engines.Add(new DynamicBundles.DynamicBundlesViewEngine()); </span>
+        }
+
+        ...
     }
-
-    ...
-}
-            </pre>
+                </pre>
 
 
-            @*-----------------------------------------------------------------------------*@
+                @*-----------------------------------------------------------------------------*@
 
 
-            <a name="installation-layout"></a><h3>3. Add layout container</h3>
-            <p>
-                In classic MVC sites, pages sit within a <span class="term">_Layout.cshtml</span> or <span class="term">_Layout.vbhtml</span>
-                file, which contains shared headers, footers, etc.
-            </p>
-            <p>
-                The problem when introducing Dynamic Bundles is that you want to separate CSS, JavaScript and pictures that
-                are specific to the layout from those that are shared by the entire site.
-            </p>
-            <p>
-                To create this separation, create a new file <span class="term">_LayoutContainer.cshtml</span> (you'll see the content in a 
-                <a href="#installation-layout-layoutcontainercontent">moment</a>). 
-                This and the <span class="term">_Layout.cshtml</span> go into their own directory. The result looks like this:
-            </p>
+                <a name="installation-layout"></a><h3>3. Add layout container</h3>
+                <p>
+                    In classic MVC sites, pages sit within a <span class="term">_Layout.cshtml</span> or <span class="term">_Layout.vbhtml</span>
+                    file, which contains shared headers, footers, etc.
+                </p>
+                <p>
+                    The problem when introducing Dynamic Bundles is that you want to separate CSS, JavaScript and pictures that
+                    are specific to the layout from those that are shared by the entire site.
+                </p>
+                <p>
+                    To make this separation happen, create a new file <span class="term">_LayoutContainer.cshtml</span> (you'll see the content in a 
+                    <a href="#installation-layout-layoutcontainercontent">moment</a>). 
+                    This and the <span class="term">_Layout.cshtml</span> go into their own directory. The result looks like this:
+                </p>
 
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-lg-6">
-            <p class="mvc-version-heading">Classic MVC</p>
-                    <img src="Images/standardmvc-solutionexplorer-layout1.png" />
+        <div class="row">
+            <div class="col-xs-12 col-lg-6">
+                <p class="mvc-version-heading">Classic MVC</p>
+                        <img src="Images/standardmvc-solutionexplorer-layout1.png" />
+            </div>
+            <div class="col-xs-12 col-lg-6">
+                            <p class="mvc-version-heading">Dynamic Bundles</p>
+                        <img src="Images/dynamicbundles-solutionexplorer-layout1-withtext.png" />
+            </div>
         </div>
-        <div class="col-xs-12 col-lg-6">
-                        <p class="mvc-version-heading">Dynamic Bundles</p>
-                    <img src="Images/dynamicbundles-solutionexplorer-layout1-withtext.png" />
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
 
-            <a name="installation-layout-layoutcontainercontent"></a><h4>Contents of <span class="term">_LayoutContainer.cshtml</span></h4>
+                <a name="installation-layout-layoutcontainercontent"></a><h4>Contents of <span class="term">_LayoutContainer.cshtml</span></h4>
 
-            <pre>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    @@*Nominate where to load the bundles. The bundles themselves are automatically generated.*@@
-    @@DynamicBundlesTopRender()
+                <pre>
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+        @@*Nominate where to load the bundles. The bundles themselves are automatically generated.*@@
+        @@DynamicBundlesTopRender()
 
-    @@RenderBody()
+        @@RenderBody()
 
-    @@DynamicBundlesBottomRender()
-&lt;/html&gt;
-            </pre>
+        @@DynamicBundlesBottomRender()
+    &lt;/html&gt;
+                </pre>
 
-            <h4>Changes to <span class="term">_Layout.cshtml</span></h4>
-            <ol>
-                <li>
-                    Remove the doctype and html tags.
-                </li>
-                <li>
-                    Remove all style and script rendering, including rendering of script sections.
-                </li>
-            </ol>
+                <h4>Changes to <span class="term">_Layout.cshtml</span></h4>
+                <ol>
+                    <li>
+                        Set <span class="term">Layout</span> to <span class="term">_LayoutContainer.cshtml</span>, which acts as the overall container of the site.
+                    </li>
+                    <li>
+                        Remove the doctype and html tags.
+                    </li>
+                    <li>
+                        Remove all style and script rendering, including rendering of script sections.
+                    </li>
+                </ol>
 
 
-            <pre>
-<span class="addedcode">@@{
-    // Add _LayoutContainer as the container for the _Layout.cshtml file itself.
-    Layout = "../_LayoutContainer/_LayoutContainer.cshtml";
-}</span>
+                <pre>
+    <span class="addedcode">@@{
+        // Add _LayoutContainer as the container for the _Layout.cshtml file itself.
+        Layout = "../_LayoutContainer/_LayoutContainer.cshtml";
+    }</span>
 
-<span class="deletedcode">&lt;!DOCTYPE html&gt;
-&lt;html&gt;</span>
-&lt;head&gt;
-    &lt;meta charset="utf-8" /&gt;
-    &lt;meta name="viewport" content="width=device-width" /&gt;
-    &lt;title&gt;@ViewBag.Title&lt;/title&gt;
+    <span class="deletedcode">&lt;!DOCTYPE html&gt;
+    &lt;html&gt;</span>
+    &lt;head&gt;
+        &lt;meta charset="utf-8" /&gt;
+        &lt;meta name="viewport" content="width=device-width" /&gt;
+        &lt;title&gt;@ViewBag.Title&lt;/title&gt;
 
-    <span class="deletedcode">@@Styles.Render("~/Content/shared/css")</span>
-    @@Styles.Render("~/Content/account/css")
-&lt;/head&gt;
-&lt;body&gt;
-    @@RenderBody()
+        <span class="deletedcode">@@Styles.Render("~/Content/shared/css")</span>
+        @@Styles.Render("~/Content/account/css")
+    &lt;/head&gt;
+    &lt;body&gt;
+        @@RenderBody()
 
-    <span class="deletedcode">@@Scripts.Render("~/bundles/jquery")</span>
-    <span class="deletedcode">@@Scripts.Render("~/bundles/shared/js")</span>
-    <span class="deletedcode">@@Scripts.Render("~/bundles/pile/js")</span>
+        <span class="deletedcode">@@Scripts.Render("~/bundles/jquery")</span>
+        <span class="deletedcode">@@Scripts.Render("~/bundles/shared/js")</span>
+        <span class="deletedcode">@@Scripts.Render("~/bundles/pile/js")</span>
 
-    <span class="deletedcode">@@RenderSection("scripts", required: false)</span>
-&lt;/body&gt;
-<span class="deletedcode">&lt;/html&gt;</span>
-            </pre>
+        <span class="deletedcode">@@RenderSection("scripts", required: false)</span>
+    &lt;/body&gt;
+    <span class="deletedcode">&lt;/html&gt;</span>
+                </pre>
 
 
 
 
-            @*-----------------------------------------------------------------------------*@
+                @*-----------------------------------------------------------------------------*@
 
-            <a name="installation-webconfig"></a><h3>4. Update Web.config for views</h3>
+                <a name="installation-webconfig"></a><h3>4. Update Web.config for views</h3>
 
-            <p>
-                In addition to the <span class="term">Web.config</span> file in the root directory of your site,
-                each MVC site also has <span class="term">Web.config</span> files in its Views directories (if your site uses areas, each area has a Views directory).
-            </p>
-<p>
-    The <span class="term">Web.config</span> files in the Views directories need to be updated to:
-</p>
-            <ol>
-                <li>
-                    Install the Dynamic Bundles page base type. This gets each view to register the assets it needs, so bundles with the right files can be generated.
-                </li>
-                <li>
-                    Allow the web server to serve CSS, JavaScript and image files from the Views directory.
-                </li>
-            </ol>
+                <p>
+                    In addition to the <span class="term">Web.config</span> file in the root directory of your site,
+                    each MVC site also has a <span class="term">Web.config</span> file in its Views directory.
+                    If your site uses areas, each area has a Views directory as well,
+                    with its own <span class="term">Web.config</span> file.
+                </p>
+    <p>
+        The <span class="term">Web.config</span> files in the Views directories need to be updated to:
+    </p>
+                <ol class="large-items">
+                    <li>
+                        Install the Dynamic Bundles page base type. This gets each view to register the assets it needs, so bundles with the right files can be generated.
+                    </li>
+                    <li>
+                        Allow the web server to serve CSS, JavaScript and image files from the Views directory.
+                    </li>
+                </ol>
 
-            <pre>
-&lt;configuration&gt;
-  &lt;system.web.webPages.razor&gt;
-    &lt;pages pageBaseType="<span class="deletedcode">System.Web.Mvc.WebViewPage</span><span class="addedcode">DynamicBundles.WebViewPage</span>"&gt;
-      ...
-    &lt;/pages&gt;
-  &lt;/system.web.webPages.razor&gt;
+                <pre>
+    &lt;configuration&gt;
+      &lt;system.web.webPages.razor&gt;
+        &lt;pages pageBaseType="<span class="deletedcode">System.Web.Mvc.WebViewPage</span><span class="addedcode">DynamicBundles.WebViewPage</span>"&gt;
+          ...
+        &lt;/pages&gt;
+      &lt;/system.web.webPages.razor&gt;
 
-  &lt;system.webServer&gt;
+      &lt;system.webServer&gt;
   
-    &lt;!--
-    The BlockViewHandler blocks all requests. In classic MVC sites, it is used to block all requests for files from
-    a Views directory. With Dynamic Bundles where CSS, JavaScript and images files are co-located with the view files,
-    we only want to block requests for the view files.
-    --&gt;
+        &lt;!--
+        The BlockViewHandler blocks all requests. In classic MVC sites, it is used to block all requests for files from
+        a Views directory. With Dynamic Bundles where CSS, JavaScript and images files are co-located with the view files,
+        we only want to block requests for the view files.
+        --&gt;
     
-    &lt;handlers&gt;
-      &lt;remove name="BlockViewHandler"/&gt; 
-      &lt;!-- Replace path="*.cshtml" with path="*.vbhtml" if you use Visual Basic. --&gt;
-      &lt;add name="BlockViewHandler" path="*<span class="addedcode">.cshtml</span>" verb="*" preCondition="integratedMode" type="System.Web.HttpNotFoundHandler" /&gt;
-    &lt;/handlers&gt;
-  &lt;/system.webServer&gt;
-&lt;/configuration&gt;
-            </pre>
+        &lt;handlers&gt;
+          &lt;remove name="BlockViewHandler"/&gt; 
+          &lt;!-- Replace path="*.cshtml" with path="*.vbhtml" if you use Visual Basic. --&gt;
+          &lt;add name="BlockViewHandler" path="*<span class="addedcode">.cshtml</span>" verb="*" preCondition="integratedMode" type="System.Web.HttpNotFoundHandler" /&gt;
+        &lt;/handlers&gt;
+      &lt;/system.webServer&gt;
+    &lt;/configuration&gt;
+                </pre>
 
 
-            <!-- ====================================================================== -->
+                <!-- ====================================================================== -->
 
-            <a name="installation-colocateassets"></a><h3>5. Co-locate assets</h3>
-            <p>
-                Finally co-locate your asset files (CSS, JavaScript, images) with the views where they are used:
-            </p>
+                <a name="installation-colocateassets"></a><h3>5. Co-locate assets</h3>
+                <p>
+                    Finally co-locate your asset files (CSS, JavaScript, images) with the views where they are used:
+                </p>
 
-            <ul class="large-items">
-                <li>
-                    Move all assets that are shared throughout the site in the 
-                    <span class="term">_LayoutContainer</span>
-                    directory.
+                <ul class="large-items">
+                    <li>
+                        Move all assets that are shared throughout the site in the 
+                        <span class="term">_LayoutContainer</span>
+                        directory.
                     
-                     <img src="Images/movefiles-layoutcontainer.PNG" />
-                </li>
-                <li>
-                    Move all assets that are shared by all views for a controller into that controller's directory.
+                         <img src="Images/movefiles-layoutcontainer.PNG" />
+                    </li>
+                    <li>
+                        Move all assets that are shared by all views for a controller into that controller's directory.
                     
-                     <img src="Images/movefiles-controller.PNG" />
-                </li>
-                <li>
-                    If there are assets specific to a single view file, create a new directory for that view file
-                    and put all assets (including the view itself) into that directory. Be sure to name the directory the same as
-                    the view file, without the extension.
+                         <img src="Images/movefiles-controller.PNG" />
+                    </li>
+                    <li>
+                        If there are assets specific to a single view file, create a new directory for that view file
+                        and put all assets (including the view itself) into that directory. Be sure to name the directory the same as
+                        the view file, without the extension.
                     
-                     <img src="Images/movefiles-dirperfile.PNG" />
-                </li>
-            </ul>
+                         <img src="Images/movefiles-dirperfile.PNG" />
+                    </li>
+                </ul>
 
+            </div>
         </div>
     </div>
 </div>
