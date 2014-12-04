@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-8">
+            <div class="col-xs-12 col-sm-8">
                     <h1>Your HTML, CSS, JavaScript and images working together</h1>
                     <p>
                         Co-locate HTML, CSS, JavaScript and image files that make up a page or component. 
@@ -254,7 +254,7 @@ The bundles themselves are automatically generated.*@@
 <div class="pagesection odd">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-md-8">
                 <a name="installation"></a><h2>Installation</h2>
 
                 <ol>
@@ -347,7 +347,7 @@ The bundles themselves are automatically generated.*@@
         </div>
 
         <div class="row">
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-md-8">
 
                 <a name="installation-layout-layoutcontainercontent"></a><h4>Contents of <span class="term">_LayoutContainer.cshtml</span></h4>
 
@@ -441,15 +441,17 @@ The bundles themselves are automatically generated.*@@
       &lt;system.webServer&gt;
   
         &lt;!--
-        The BlockViewHandler blocks all requests. In classic MVC sites, it is used to block all requests for files from
-        a Views directory. With Dynamic Bundles where CSS, JavaScript and images files are co-located with the view files,
-        we only want to block requests for the view files.
+        The BlockViewHandler blocks all requests. In classic MVC sites, it is used to block all 
+        requests for files from a Views directory. With Dynamic Bundles where CSS, JavaScript 
+        and images files are co-located with the view files, we only want to block requests 
+        for the view files.
         --&gt;
     
         &lt;handlers&gt;
           &lt;remove name="BlockViewHandler"/&gt; 
           &lt;!-- Replace path="*.cshtml" with path="*.vbhtml" if you use Visual Basic. --&gt;
-          &lt;add name="BlockViewHandler" path="*<span class="addedcode">.cshtml</span>" verb="*" preCondition="integratedMode" type="System.Web.HttpNotFoundHandler" /&gt;
+          &lt;add name="BlockViewHandler" path="*<span class="addedcode">.cshtml</span>" verb="*" preCondition="integratedMode" 
+               type="System.Web.HttpNotFoundHandler" /&gt;
         &lt;/handlers&gt;
       &lt;/system.webServer&gt;
     &lt;/configuration&gt;
@@ -477,11 +479,21 @@ The bundles themselves are automatically generated.*@@
                          <img src="Images/movefiles-controller.PNG" />
                     </li>
                     <li>
-                        If there are assets specific to a single view file, create a new directory for that view file
-                        and put all assets (including the view itself) into that directory. Be sure to name the directory the same as
+                        If there are assets specific to a single view file, create a sub directory for that view file
+                        and put all assets (including the view itself) into that sub directory. Be sure to name the sub directory the same as
                         the view file, without the extension.
                     
                          <img src="Images/movefiles-dirperfile.PNG" />
+                    </li>
+                    <li>
+                        Dynamic Bundles will add both the assets in the sub directory and those in its parent directory(s), less specific assets first.
+                        In the example below, when <span class="term">/Product/List</span> is loaded, first the assets in 
+                        <span class="term">~/Views/Product</span> and then those in 
+                        <span class="term">~/Views/Product/List</span> are added.
+                        <br /><br />
+                        This works for both controller specific views and shared (partial) views. Dynamic Bundles makes sure that assets are only ever added
+                        once to a bundle.
+                         <img src="Images/movefiles-controller-subdir.PNG" />
                     </li>
                 </ul>
 
