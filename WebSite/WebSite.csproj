@@ -197,6 +197,7 @@
     <Content Include="App_Code\Generated.cs.template" />
     <Content Include="Images\dynamicbundles-solutionexplorer-layout1-withtext.png" />
     <Content Include="Images\dynamicbundles-solutionexplorer2-withtext.png" />
+    <Content Include="Images\movefiles-controller-subdir.PNG" />
     <Content Include="Images\movefiles-controller.PNG" />
     <Content Include="Images\movefiles-dirperfile.PNG" />
     <Content Include="Images\movefiles-layoutcontainer.PNG" />
