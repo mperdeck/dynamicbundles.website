@@ -134,7 +134,8 @@
     <Content Include="Views\Product\Details.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\Product\List\List.cshtml" />
+    <Content Include="Views\Product\List\List.css" />
     <Content Include="Views\Product\Product.css" />
     <Content Include="Views\Product\ProductPageBg.png" />
     <Content Include="Views\Product\ProductViewer.js" />

@@ -273,6 +273,9 @@ The bundles themselves are automatically generated.*@@
                     <li>
                         <a href="#installation-colocateassets">Co-locate assets</a>
                     </li>
+                    <li>
+                        <a href="#installation-dependencies">Create explicit dependencies</a>
+                    </li>
                 </ol>
 
                 @*-----------------------------------------------------------------------------*@
@@ -494,6 +497,48 @@ The bundles themselves are automatically generated.*@@
                         This works for both controller specific views and shared (partial) views. Dynamic Bundles makes sure that assets are only ever added
                         once to a bundle.
                          <img src="Images/movefiles-controller-subdir.PNG" />
+                    </li>
+                </ul>
+
+                <!-- ====================================================================== -->
+
+                <a name="installation-dependencies"></a><h3>6. Create explicit dependencies</h3>
+                <p>
+                    You may have dependencies from one directory on another. For example, a JavaScript file assumes that a 
+                    file in another directory has been loaded. 
+                </p>
+                <p>
+                    You can specify these dependencies with <span class="term">.nuspec</span> files. These have the same structure
+                    as their NuGet counterparts
+                    (<a href="http://docs.nuget.org/docs/reference/nuspec-reference" target="_blank">definition</a>).
+                </p>
+                <p>
+                    If Dynamic Bundles finds a nuspec file in a directory, it will find the directories specified in that nuspec file
+                    and add the assets in those directories to the bundles. If those directories have nuspec files themselves, 
+                    Dynamic Bundles processes those nuspec files as well, etc. This is a fully recurrent process.
+                </p>
+                <p>
+                    To create a dependency from a directory X to some other directories, include a .nuspec file in directory X that looks like this:                   
+                </p>
+                <pre>&lt;?xml version="1.0"?&gt;
+&lt;package &gt;
+  &lt;metadata&gt;
+      &lt;dependencies&gt;
+        &lt;dependency id="../AccountDetailsAssets" /&gt;
+        &lt;dependency id="~/Views/Shared/DetailsAssets" /&gt;
+      &lt;/dependencies&gt;
+  &lt;/metadata&gt;
+&lt;/package&gt;</pre>
+                <p>
+                    Note that:
+                </p>
+                <ul>
+                    <li>
+                        The name of the .nuspec file doesn't matter, as long as it has the extension .nuspec.
+                    </li>
+                    <li>
+                        You can specify root relative paths (starting with <span class="term">~/</span>) and paths relative to the .nuspec file, but not 
+                        absolute paths (such as <span class="term">C:\Dev\Views\Accounts</span>).
                     </li>
                 </ul>
 
